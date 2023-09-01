@@ -3,10 +3,16 @@ money = 0
 has_scissors = False
 
 #Define function to cut lawn using teeth
-def cut_lawn():
+def cut_lawn_teeth():
     global money
     money += 1
     print("You Spent the day cutting lawns with your teeth and earned $1.")
+
+#Define funtion to cut lawn using scissors
+def cut_lawn_scissors():
+    global money
+    money += 5
+    print("You spent the day cutting lawns with rusty scissors and earned $5.")
 
 # Define a function to buy rusty scissors
 def buy_scissors():
@@ -25,16 +31,23 @@ def buy_scissors():
 while True:
     print(f"Your current balance: ${money}")
     print("What do you want to do?")
-    print("1. Cut the lawn")
-    print("2. Buy rusty scissors")
-    print("3. Quit")
+    print("1. Cut the lawn with your teeth")
+    print("2. Cut the lawn with rusty scissors")
+    print("3. Buy rusty scissors")
+    print("4. Quit")
 
     choice = input("Enter your choice: ")
 
+
     if choice == '1':
-        cut_lawn()
-    if choice == '2':
+        cut_lawn_teeth()
+    elif choice == '2':
+        if has_scissors:
+            cut_lawn_scissors()
+        else:
+            print("You don't have rusty scissors. Buy them first.")
+    elif choice == '3':
         buy_scissors()
-    if choice == '3':
-        print("Thanks For Playing Landscaper!")
+    if choice == '4':
+        print("Thanks for playing landscaper!")
         break
