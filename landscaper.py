@@ -129,6 +129,9 @@ while True:
     elif choice == '5':
         if has_students:
             cut_lawn_with_students()
+            if money >= 1000:
+                print("Congratulations! You won the game by earning $1,000 with a team of students.")
+                break   
         else:
             print("You didn't hire a team of students. Hire them first.")
     if choice == '6':
