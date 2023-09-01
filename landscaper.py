@@ -3,6 +3,7 @@ money = 0
 has_scissors = False
 has_push_lawnmower = False
 has_fancy_lawnmower = False
+has_students = False
 
 #Define function to cut lawn using teeth
 def cut_lawn_teeth():
@@ -28,6 +29,11 @@ def cut_lawn_with_fancy_lawnmower():
     money += 100
     print("You spent the day cutting lawns with a fancy battery-powered lawnmower and earned $100.")
 
+# Define a function to cut the lawn using team of students
+def cut_lawn_with_students():
+    global money
+    money += 250
+    print("You spent the day cutting lawns with students and earned $250")
 
 # Define a function to buy rusty scissors
 def buy_scissors():
@@ -69,6 +75,20 @@ def buy_fancy_lawnmower():
     else:
         print("You don't have enough money to buy a fancy lawnmower.")
 
+# Define a function to hire students
+def hire_students():
+    global money, has_students
+    if money >= 500 and not has_students and has_fancy_lawnmower:
+        money -= 500
+        has_students = True
+        print("You hired a team of students")
+    elif has_students:
+        print("You already hired a team of students")
+    elif not has_students:
+        print("You can't hire a team of students without a fancy lawnmower. Buy the battery-powered lawnmower first")
+    else:
+        print("You don't have enough money to hire a team of students")
+
 
 # Main game loop
 while True:
@@ -78,10 +98,12 @@ while True:
     print("2. Cut the lawn with rusty scissors")
     print("3. Cut the lawn with an old-timey push lawnmower")
     print("4. Cut the lawn with a fancy battery-powered lawnmower")
-    print("5. Buy rusty scissors")
-    print("6. Buy an old-timey push lawnmower")
-    print("7. Buy a fancy battery-powered lawnmower")
-    print("8. Quit")
+    print("5. Cut the lawn with a team of students")
+    print("6. Buy rusty scissors")
+    print("7. Buy an old-timey push lawnmower")
+    print("8. Buy a fancy battery-powered lawnmower")
+    print("9. Hire a team of students")
+    print("10. Quit")
 
 
     choice = input("Enter your choice: ")
@@ -104,12 +126,19 @@ while True:
             cut_lawn_with_fancy_lawnmower()
         else:
             print("You don't have a fancy battery-powered lawnmower. Buy it first.")
-    if choice == '5':
-        buy_scissors()
+    elif choice == '5':
+        if has_students:
+            cut_lawn_with_students()
+        else:
+            print("You didn't hire a team of students. Hire them first.")
     if choice == '6':
-        buy_push_lawnmower()
+        buy_scissors()
     if choice == '7':
-        buy_fancy_lawnmower()
+        buy_push_lawnmower()
     if choice == '8':
+        buy_fancy_lawnmower()
+    if choice == '9':
+        hire_students()
+    if choice == '10':
         print("Thanks for playing Landscaper!")
         break
